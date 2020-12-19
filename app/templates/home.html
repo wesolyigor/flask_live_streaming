@@ -1,8 +1,30 @@
-{% extends '_base.html' %}
-
+{% extends '_base.html'  %}
 
 {% block content %}
 
-<h1>Hello world!</h1>
+{{ super() }}
+
+
+<h2>Login as a user</h2>
+<form action="" method="post">
+    {{ form_user.hidden_tag() }}
+    {{ form_user.name.label }}
+        {{ form_user.name }}
+    {{ form_user.room.label }}
+        {{ form_user.room }}
+        {{ form_user.submit }}
+
+
+</form>
+
+<h2>Create a new transmission</h2>
+<form action="" method="post">
+    {{ form_user.hidden_tag() }}
+    {{ form_commentator.room_admin.label }}
+        {{ form_commentator.room_admin }}
+    {{ form_commentator.submit }}
+</form>
+
+
 
 {% endblock %}
