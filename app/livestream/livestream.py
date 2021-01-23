@@ -19,13 +19,11 @@ def livestream():
     return render_template('livestream.html')
 
 
-
 @socketio.on('joined', namespace='/livestream')
 def joined(message):
     room = session.get('room')
     join_room(room)
     # emit('status', {'msg': f'{session.get("name")} dołączył do pokoju.'}, room=room)
-
 
 
 @socketio.on('left', namespace='/livestream')

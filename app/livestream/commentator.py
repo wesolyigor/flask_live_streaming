@@ -17,26 +17,26 @@ def commentator():
     return render_template('commentator.html', room=room)
 
 
-
-@socketio.on('message', namespace='/commentator')
+@socketio.on('message', namespace='/comentator')
 def handle_message(message):
+    print(message["msg"])
     room = session.get('room')
-    emit('message', {f'{session.get("name")}: {message["msg"]} '}, room=room, namespace='/commentator', broadcast=True)
+    emit('message', message["msg"], room=room, namespace='/livestream', broadcast=True)
 
 
 # @socketio.on('joined', namespace='/livestream')
 # def joined(message):
 #     room = session.get('room')
 #     join_room(room)
-    # emit('status', {'msg': f'{session.get("name")} dołączył do pokoju.'}, room=room)
+# emit('status', {'msg': f'{session.get("name")} dołączył do pokoju.'}, room=room)
 
 
 @socketio.on('joined', namespace='/commentator')
 def joined(message):
     room = session.get('room')
     join_room(room)
-    emit('message', {'msg': f'{session.get("name")} dołączył do pokoju.'}, room=room, broadcast=True, namespace='/livestream')
-
+    emit('message', {'msg': f'{session.get("name")} dołączył do pokoju.'}, room=room, broadcast=True,
+         namespace='/livestream')
 
 
 @socketio.on('left', namespace='/commentator')
